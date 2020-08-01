@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<table class="table table-bordered">
+  <tr>
+    <th><%= @blog.title %></th>
+  </tr>
+  <tr>
+    <td>
+      <%= safe_join(@blog.content.split("\n"),tag(:br)) %><br><br>
+      <%= l @blog.created_at, format: :short %>
+    </td>
+  </tr>
+</table>
+
+<%= link_to 'Edit', edit_blog_path(@blog) %> |
+<%= link_to 'Back', blogs_path %>
