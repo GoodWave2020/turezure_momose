@@ -21,6 +21,29 @@
       <%= form.text_area :content, class: "form-control"%>
     </div>
 
+    <% if action_name == "edit" %>
+      <div class="field">
+        <% @tag_number = 1 %>
+        <%= form.fields_for :comments do |comment| %>
+          <h2>コメント<%= @tag_number %></h2>
+          <% @tag_number += 1 %>
+          <p>
+            <%= comment.label :name %>
+            <%= comment.text_field :name %>
+          </p>
+          <p>
+            <%= comment.label :content %>
+            <%= comment.text_field :content %>
+          </p>
+          <% if @blog.persisted? %>
+            <%= comment.label "削除" %>
+            <%= comment.check_box :_destroy %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+
+
     <div class="actions">
       <%= form.submit "投稿", class: "btn btn-primary" %>
     </div>

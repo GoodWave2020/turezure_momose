@@ -3,7 +3,7 @@
 <h1>ブログ一覧</h1>
 <p><%= notice %></p>
 <table class="table table-bordered">
-<% @blogs.each do |blog| %>
+<% @blogs.order(created_at: "DESC").each do |blog| %>
   <tr>
     <td>
       <%= link_to blog.title, blog_path(blog.id)%>
@@ -15,6 +15,9 @@
       <%= link_to "編集", edit_blog_path(blog.id) %>
       <%= link_to "削除", blog_path(blog.id),
               method: :delete, data: { confirm: "本当に削除しますか" }%>
+      <%  if blog.comments.size > 0 %>
+      <%= blog.comments.size%>件のコメント
+      <% end %>
     </td>
   </tr>
 <% end %>

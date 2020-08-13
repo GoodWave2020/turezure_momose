@@ -15,10 +15,12 @@ class BlogsController < ApplicationController
   # GET /blogs/new
   def new
     @blog = Blog.new
+    @blog.comments.build
   end
 
   # GET /blogs/1/edit
   def edit
+    @blog.comments.build
   end
 
   # POST /blogs
@@ -69,6 +71,7 @@ class BlogsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def blog_params
-      params.require(:blog).permit(:title, :content)
+      params.require(:blog).permit(:title, :content,
+             comments_attributes: [:id, :name, :content, :blog_id, :_destroy])
     end
 end
