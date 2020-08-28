@@ -12,22 +12,11 @@
   </tr>
 </table>
 
-<table class="table table-bordered">
-  <% @tag_number = 1 %>
-  <% @blog.comments.each do |comment| %>
-  <tr>
-    <th><%= @tag_number %>. <%= comment.name %></th>
-  </tr>
-  <tr>
-    <td>
-      <%= safe_join(comment.content.split("\n"),tag(:br)) %><br><br>
-      <%= l comment.created_at, format: :short %>
-    </td>
-  </tr>
-  <% @tag_number += 1 %>
-  <% end %>
-</table>
-
+<h2>コメント</h2>
+<div id="comments_area">
+  <%= render partial: 'comments/index', locals: { comments: @comments, blog: @blog } %>
+</div>
+<%= render partial: 'comments/form', locals: { comment: @comment, blog: @blog } %>
 
 <%= link_to 'Edit', edit_blog_path(@blog) %> |
 <%= link_to 'Back', blogs_path %>
